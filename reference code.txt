@@ -1,0 +1,1027 @@
+<div class="container-fluid">
+    <div class="row page-header-row">
+        <div class="col-md-6 page-title">
+            Deal Masters
+        </div>
+    </div>
+    <div class="container-fluid page-body">
+        <div class="row ng-section">
+            <div class="col-md-12" data-bs-toggle="collapse" data-bs-target="#myCollapsibleDiv" aria-expanded="false"
+                aria-controls="myCollapsibleDiv">
+                <i class="fa fa-bars fa-lg" aria-hidden="true"></i>
+                Fund Source
+            </div>
+        </div>
+        <br>
+        <div class="row collapse show" id="myCollapsibleDiv">
+            <div class="row" *ngIf="masterForm">
+                <form [formGroup]="masterForm">
+                    <div class="container-fluid page-body">
+                        <div class="row ng-section">
+                            <div class="col-md-12" data-bs-toggle="collapse" data-bs-target="#myCollapsibleDiv1"
+                                aria-expanded="false" aria-controls="myCollapsibleDiv1">
+                                <i class="fa fa-bars fa-lg" aria-hidden="true"></i>
+                                Bank Details
+                            </div>
+                        </div>
+                        <div class="row collapse show" id="myCollapsibleDiv1">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label asterisk " style="margin-top: 0.4cm;"
+                                            matTooltip="Company Name" matTooltipPosition="above">
+                                            Company Name
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <div class="col-md-12 my-ng-select div-form-field">
+                                                    <ng-select id="companyName" formControlName="companyId"
+                                                        appendTo="body" [items]="listOfCompany" bindValue="companyId"
+                                                        bindLabel="companyName"
+                                                        (change)="sharedService.checkRestricted($event,'companyId','companyId',masterForm)"
+                                                        [clearable]="true" placeholder="Please select company name">
+                                                    </ng-select><mat-error
+                                                        *ngIf="(f.companyId.errors && f.companyId.touched) && !f.companyId.valid">
+                                                        <span *ngIf="f.companyId.errors?.required">Select company
+                                                            name</span>
+                                                    </mat-error>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label asterisk " matTooltip="Branch IFSC Code"
+                                            matTooltipPosition="above">
+                                            Branch IFSC Code
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <div class="col-md-12 my-ng-select div-form-field">
+                                                    <ng-select id="ifsc" formControlName="ifscId" appendTo="body"
+                                                        [items]="listOfIfsc" bindValue="ifscId" bindLabel="ifscCode"
+                                                        [clearable]="true" placeholder="Please select company name"
+                                                        (change)="onIfscSelection($event)">
+                                                    </ng-select><mat-error
+                                                        *ngIf="(f.ifscId.errors && f.ifscId.touched) && !f.ifscId.valid">
+                                                        <span *ngIf="f.ifscId.errors?.required">Select ifsc </span>
+                                                    </mat-error>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label asterisk " style="margin-top: 0.4cm;"
+                                            matTooltip="Bank Name" matTooltipPosition="above">
+                                            Bank Name
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <div class="col-md-12 my-ng-select div-form-field">
+                                                    <ng-select id="bank" formControlName="bankId" appendTo="body"
+                                                        [items]="selectedBankName" bindValue="bankId" bindLabel="bankName"
+                                                        [clearable]="true" [isOpen]="false" [searchable]="false"
+                                                        (change)="sharedService.checkRestricted($event,'bankId','bankId',masterForm)"
+                                                        placeholder="Please select bank">
+                                                    </ng-select><mat-error
+                                                        *ngIf="(f.bankId.errors && f.bankId.touched) && !f.bankId.valid">
+                                                        <span *ngIf="f.bankId.errors?.required">Select bank</span>
+                                                    </mat-error>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label asterisk " matTooltip=" Bank Branch Name"
+                                            matTooltipPosition="above">
+                                            Bank Branch Name
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <mat-form-field class="col-md-12 div-form-field">
+                                                    <input id="bankBranchName" matInput type="text" readonly
+                                                        formControlName="bankBranchName"
+                                                        placeholder="Please enter bank branch name" maxlength="50" />
+
+                                                    <mat-icon matSuffix class="text-success"
+                                                        *ngIf="apiService.validate(masterForm,'bankBranchName')">
+                                                        done
+                                                    </mat-icon>
+                                                    <mat-error
+                                                        *ngIf="f.bankBranchName.errors && f.bankBranchName.touched && !f.bankBranchName.valid">
+                                                        <span
+                                                            *ngIf="f.bankBranchName.errors?.pattern">{{formControlsAndValidations.validationMessages.branchName}}</span>
+                                                        <span *ngIf="f.bankBranchName.errors?.required">Branch name is
+                                                            required</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label asterisk " matTooltip="Branch Code"
+                                            matTooltipPosition="above">
+                                            Branch Code
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <mat-form-field class="col-md-12 div-form-field">
+                                                    <input id="bankBranchCode" matInput type="text" readonly
+                                                        formControlName="bankBranchCode"
+                                                        placeholder="Please enter branch code" maxlength="20" />
+
+                                                    <mat-icon matSuffix class="text-success"
+                                                        *ngIf="apiService.validate(masterForm,'bankBranchCode')">
+                                                        done
+                                                    </mat-icon>
+                                                    <mat-error
+                                                        *ngIf="f.bankBranchCode.errors && f.bankBranchCode.touched && !f.bankBranchCode.valid">
+                                                        <span
+                                                            *ngIf="f.bankBranchCode.errors?.pattern">{{formControlsAndValidations.validationMessages.branchCode}}</span>
+                                                        <span *ngIf="f.bankBranchCode.errors?.required">Branch code is
+                                                            required</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label asterisk " matTooltip="MICR"
+                                            matTooltipPosition="above">
+                                            MICR
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <mat-form-field class="col-md-12 div-form-field">
+                                                    <input id="micrCode" matInput type="text" formControlName="micrCode" readonly
+                                                        placeholder="Please enter micr code" maxlength="9" />
+                                                    <mat-icon matSuffix class="color-neo-light-red"
+                                                        matTooltip="Micr code should be of 9 numbers"
+                                                        *ngIf="!apiService.validate(masterForm,'micrCode')">info</mat-icon>
+                                                    <mat-icon matSuffix class="text-success"
+                                                        *ngIf="apiService.validate(masterForm,'micrCode')">
+                                                        done
+                                                    </mat-icon>
+                                                    <mat-error
+                                                        *ngIf="f.micrCode.errors && f.micrCode.touched && !f.micrCode.valid">
+                                                        <span
+                                                            *ngIf="f.micrCode.errors?.pattern">{{formControlsAndValidations.validationMessages.micrCode}}</span>
+                                                        <span *ngIf="f.micrCode.errors?.required">Micr is
+                                                            required</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label asterisk " style="margin-top: 0.4cm;"
+                                            matTooltip="Pincode" matTooltipPosition="above">
+                                            Pincode
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <div class="col-md-12 my-ng-select div-form-field">
+                                                    <ng-select id="pincode" formControlName="pincodeId" appendTo="body"
+                                                        [items]="listOfPincode" bindValue="pincodeId"
+                                                        bindLabel="pincode" [clearable]="true"
+                                                        placeholder="Please select pincode"
+                                                        (change)="onPincodeSelection($event)"
+                                                        [inputAttrs]="{maxlength: '6'}">
+                                                    </ng-select>
+
+
+
+                                                    <mat-error
+                                                        *ngIf="(f.pincodeId.errors && f.pincodeId.touched) && !f.pincodeId.valid">
+                                                        <span *ngIf="f.pincodeId.errors?.required">Select pincode</span>
+                                                    </mat-error>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label asterisk " style="margin-top: 0.4cm;"
+                                            matTooltip="City" matTooltipPosition="above">
+                                            City
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <div class="col-md-12 my-ng-select div-form-field">
+                                                    <ng-select id="city" formControlName="cityId" appendTo="body" 
+                                                        [items]="selectedCity" bindValue="cityId" bindLabel="cityName" 
+                                                        [clearable]="false" [isOpen]="false" [searchable]="false" 
+                                                        placeholder="Please select city">
+                                                    </ng-select><mat-error
+                                                        *ngIf="(f.cityId.errors && f.cityId.touched) && !f.cityId.valid">
+                                                        <span *ngIf="f.cityId.errors?.required">Select city</span>
+                                                    </mat-error>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label asterisk " style="margin-top: 0.4cm;"
+                                            matTooltip="State" matTooltipPosition="above">
+                                            State
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <div class="col-md-12 my-ng-select div-form-field">
+                                                    <ng-select id="state" formControlName="stateId" appendTo="body"
+                                                        [items]="selectedState" bindValue="stateId" bindLabel="stateName"
+                                                        [clearable]="false" [isOpen]="false" [searchable]="false"
+                                                        placeholder="Please select state">
+                                                    </ng-select><mat-error
+                                                        *ngIf="(f.stateId.errors && f.stateId.touched) && !f.stateId.valid">
+                                                        <span *ngIf="f.stateId.errors?.required">Select state</span>
+                                                    </mat-error>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label asterisk " style="margin-top: 0.4cm;"
+                                            matTooltip="Country" matTooltipPosition="above">
+                                            Country
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <div class="col-md-12 my-ng-select div-form-field">
+                                                    <ng-select id="country" formControlName="countryId" appendTo="body"
+                                                        [items]="selectedCountry" bindValue="countryId"
+                                                        bindLabel="countryName" [clearable]="false" [isOpen]="false"
+                                                        [searchable]="false" placeholder="Please select country">
+                                                    </ng-select><mat-error
+                                                        *ngIf="(f.countryId.errors && f.countryId.touched) && !f.countryId.valid">
+                                                        <span *ngIf="f.countryId.errors?.required">Select country</span>
+                                                    </mat-error>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label  " matTooltip="Address"
+                                            matTooltipPosition="above">
+                                            Address
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <mat-form-field class="col-md-12 div-form-field">
+                                                    <textarea id="address" matInput formControlName="address"
+                                                        maxlength="200" placeholder="Please enter address">
+                                                </textarea>
+                                                    <mat-icon matSuffix class="color-neo-light-red"
+                                                        *ngIf="!apiService.validate(masterForm,'address')"
+                                                        [matTooltip]="commonMessages.ADDRESS">info</mat-icon>
+                                                    <mat-icon matSuffix class="text-success"
+                                                        *ngIf="apiService.validate(masterForm,'address')">
+                                                        done
+                                                    </mat-icon>
+                                                    <mat-error
+                                                        *ngIf="f.address.errors && f.address.touched && !f.address.valid">
+                                                        <span
+                                                            *ngIf="f.address.errors?.pattern">{{formControlsAndValidations.validationMessages.address}}</span>
+                                                        <span *ngIf="f.address.errors?.required">Address is
+                                                            required</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label" matTooltip="Phone Number"
+                                            matTooltipPosition="above">
+                                            Phone Number
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <mat-form-field class="col-md-12 div-form-field">
+                                                    <input id="phoneNumber" matInput type="text"
+                                                        formControlName="phoneNumber"
+                                                        placeholder="Please enter phone number" maxlength="10" />
+                                                    <mat-icon matSuffix class="color-neo-light-red"
+                                                        matTooltip="Phone number should be of 10 numbers"
+                                                        *ngIf="!apiService.validate(masterForm,'phoneNumber')">info</mat-icon>
+                                                    <mat-icon matSuffix class="text-success"
+                                                        *ngIf="apiService.validate(masterForm,'phoneNumber')">
+                                                        done
+                                                    </mat-icon>
+                                                    <mat-error
+                                                        *ngIf="f.phoneNumber.errors && f.phoneNumber.touched && !f.phoneNumber.valid">
+                                                        <span
+                                                            *ngIf="f.phoneNumber.errors?.pattern">{{formControlsAndValidations.validationMessages.phoneNumber}}</span>
+                                                        <span *ngIf="f.phoneNumber.errors?.required">Phone number is
+                                                            required</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label" matTooltip="STD Code"
+                                            matTooltipPosition="above">
+                                            STD Code
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <mat-form-field class="col-md-12 div-form-field">
+                                                    <input id="phoneStdCode" matInput type="text"
+                                                        formControlName="phoneStdCode"
+                                                        placeholder="Please enter std code" maxlength="4" />
+                                                    <mat-icon matSuffix class="color-neo-light-red"
+                                                        matTooltip="Std code can vary from 1 - 4 digits"
+                                                        *ngIf="!apiService.validate(masterForm,'phoneStdCode')">info</mat-icon>
+                                                    <mat-icon matSuffix class="text-success"
+                                                        *ngIf="apiService.validate(masterForm,'phoneStdCode')">
+                                                        done
+                                                    </mat-icon>
+                                                    <mat-error
+                                                        *ngIf="f.phoneStdCode.errors && f.phoneStdCode.touched && !f.phoneStdCode.valid">
+                                                        <span
+                                                            *ngIf="f.phoneStdCode.errors?.pattern">{{formControlsAndValidations.validationMessages.phoneStdCode}}</span>
+                                                        <span *ngIf="f.phoneStdCode.errors?.required">Std code is
+                                                            required</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label" matTooltip="Fax Number"
+                                            matTooltipPosition="above">
+                                            Fax Number
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <mat-form-field class="col-md-12 div-form-field">
+                                                    <input id="faxNumber" matInput type="text"
+                                                        formControlName="faxNumber"
+                                                        placeholder="Please enter fax number" maxlength="10" />
+                                                    <mat-icon matSuffix class="color-neo-light-red"
+                                                        matTooltip="Fax number should be of 10 numbers"
+                                                        *ngIf="!apiService.validate(masterForm,'faxNumber')">info</mat-icon>
+                                                    <mat-icon matSuffix class="text-success"
+                                                        *ngIf="apiService.validate(masterForm,'faxNumber')">
+                                                        done
+                                                    </mat-icon>
+                                                    <mat-error
+                                                        *ngIf="f.faxNumber.errors && f.faxNumber.touched && !f.faxNumber.valid">
+                                                        <span
+                                                            *ngIf="f.faxNumber.errors?.pattern">{{formControlsAndValidations.validationMessages.faxNumber}}</span>
+                                                        <span *ngIf="f.faxNumber.errors?.required">Fax number is
+                                                            required</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label" matTooltip="Relationship Person"
+                                            matTooltipPosition="above">
+                                            Relationship Person
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <mat-form-field class="col-md-12 div-form-field">
+                                                    <input id="relationshipPerson" matInput type="text"
+                                                        formControlName="relationshipPerson"
+                                                        placeholder="Please enter relationship person" maxlength="20" />
+                                                    <mat-icon matSuffix class="color-neo-light-red"
+                                                        matTooltip="Enter relationship person name between 1 and 20 characters in length"
+                                                        *ngIf="!apiService.validate(masterForm,'relationshipPerson')">info</mat-icon>
+                                                    <mat-icon matSuffix class="text-success"
+                                                        *ngIf="apiService.validate(masterForm,'relationshipPerson')">
+                                                        done
+                                                    </mat-icon>
+                                                    <mat-error
+                                                        *ngIf="f.relationshipPerson.errors && f.relationshipPerson.touched && !f.relationshipPerson.valid">
+                                                        <span
+                                                            *ngIf="f.relationshipPerson.errors?.pattern">{{formControlsAndValidations.validationMessages.relationshipPerson}}</span>
+                                                        <span *ngIf="f.relationshipPerson.errors?.required">relationship
+                                                            person is
+                                                            required</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label" matTooltip="Mobile Number"
+                                            matTooltipPosition="above">
+                                            Mobile Number
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <mat-form-field class="col-md-12 div-form-field">
+                                                    <input id="mobileNumber" matInput type="text"
+                                                        formControlName="mobileNumber"
+                                                        placeholder="Please enter mobile number" maxlength="10" />
+                                                    <mat-icon matSuffix class="color-neo-light-red"
+                                                        matTooltip="Mobile number should be of 10 numbers"
+                                                        *ngIf="!apiService.validate(masterForm,'mobileNumber')">info</mat-icon>
+                                                    <mat-icon matSuffix class="text-success"
+                                                        *ngIf="apiService.validate(masterForm,'mobileNumber')">
+                                                        done
+                                                    </mat-icon>
+                                                    <mat-error
+                                                        *ngIf="f.mobileNumber.errors && f.mobileNumber.touched && !f.mobileNumber.valid">
+                                                        <span
+                                                            *ngIf="f.mobileNumber.errors?.pattern">{{formControlsAndValidations.validationMessages.mobileNumber}}</span>
+                                                        <span *ngIf="f.mobileNumber.errors?.required">Mobile number is
+                                                            required</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label" matTooltip="Email ID"
+                                            matTooltipPosition="above">
+                                            Email ID
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <mat-form-field class="col-md-12 div-form-field">
+                                                    <input id="emailId" matInput type="text" formControlName="emailId"
+                                                        maxlength="100" placeholder="Please enter email id" />
+                                                    <mat-icon matSuffix class="color-neo-light-red" matTooltip="Email should be in proper format with max length 100 
+                                                    Eg: example@gmail.com"
+                                                        *ngIf="!apiService.validate(masterForm,'emailId')">info</mat-icon>
+                                                    <mat-icon matSuffix class="text-success"
+                                                        *ngIf="apiService.validate(masterForm,'emailId')">
+                                                        done
+                                                    </mat-icon>
+                                                    <mat-error
+                                                        *ngIf="f.emailId.errors && f.emailId.touched && !f.emailId.valid">
+                                                        <span
+                                                            *ngIf="f.emailId.errors?.pattern">{{formControlsAndValidations.validationMessages.emailId}}</span>
+                                                        <span *ngIf="f.emailId.errors?.required">Email id is
+                                                            required</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="container-fluid page-body">
+                        <div class="row ng-section">
+                            <div class="col-md-12" data-bs-toggle="collapse" data-bs-target="#myCollapsibleDiv2"
+                                aria-expanded="false" aria-controls="myCollapsibleDiv2">
+                                <i class="fa fa-bars fa-lg" aria-hidden="true"></i>
+                                Account Details
+                            </div>
+                        </div>
+                        <div class="row collapse show" id="myCollapsibleDiv2">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label asterisk" style="margin-top: 0.4cm;"
+                                            matTooltip="Account Type" matTooltipPosition="above">
+                                            Account Type
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <div class="col-md-12 my-ng-select div-form-field">
+                                                    <ng-select id="accountType" formControlName="accountTypeCode"
+                                                        appendTo="body" [items]="listOfAccountType"
+                                                        bindValue="commonCode" bindLabel="commonValue"
+                                                        [clearable]="true" placeholder="Please select account type">
+                                                    </ng-select><mat-error
+                                                        *ngIf="(f.accountTypeCode.errors && f.accountTypeCode.touched) && !f.accountTypeCode.valid">
+                                                        <span *ngIf="f.accountTypeCode.errors?.required">Select account
+                                                            type</span>
+                                                    </mat-error>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label asterisk " matTooltip="Account Number"
+                                            matTooltipPosition="above">
+                                            Account Number
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <mat-form-field class="col-md-12 div-form-field">
+                                                    <input id="accountNumber" matInput type="text"
+                                                        formControlName="accountNumber"
+                                                        placeholder="Please enter account number" maxlength="16" />
+                                                    <mat-icon matSuffix class="color-neo-light-red"
+                                                        matTooltip="Account number should be of 16 digits"
+                                                        *ngIf="!apiService.validate(masterForm,'accountNumber')">info</mat-icon>
+                                                    <mat-icon matSuffix class="text-success"
+                                                        *ngIf="apiService.validate(masterForm,'accountNumber')">
+                                                        done
+                                                    </mat-icon>
+                                                    <mat-error
+                                                        *ngIf="f.accountNumber.errors && f.accountNumber.touched && !f.accountNumber.valid">
+                                                        <span
+                                                            *ngIf="f.accountNumber.errors?.pattern">{{formControlsAndValidations.validationMessages.accountNumber}}</span>
+                                                        <span *ngIf="f.accountNumber.errors?.required">Account Number is
+                                                            required</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label asterisk " matTooltip="Account Name"
+                                            matTooltipPosition="above">
+                                            Account Name
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <mat-form-field class="col-md-12 div-form-field">
+                                                    <input id="accountName" matInput type="text"
+                                                        formControlName="accountName"
+                                                        placeholder="Please enter account name" maxlength="50" />
+                                                    <mat-icon matSuffix class="color-neo-light-red"
+                                                        matTooltip="Enter account name between 1 and 50 characters in length"
+                                                        *ngIf="!apiService.validate(masterForm,'accountName')">info</mat-icon>
+                                                    <mat-icon matSuffix class="text-success"
+                                                        *ngIf="apiService.validate(masterForm,'accountName')">
+                                                        done
+                                                    </mat-icon>
+                                                    <mat-error
+                                                        *ngIf="f.accountName.errors && f.accountName.touched && !f.accountName.valid">
+                                                        <span
+                                                            *ngIf="f.accountName.errors?.pattern">{{formControlsAndValidations.validationMessages.accountName}}</span>
+                                                        <span *ngIf="f.accountName.errors?.required">Account name is
+                                                            required</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label" matTooltip="User Number"
+                                            matTooltipPosition="above">
+                                            User Number
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <mat-form-field class="col-md-12 div-form-field">
+                                                    <input id="userNumber" matInput type="text"
+                                                        formControlName="userNumber"
+                                                        placeholder="Please enter user number" maxlength="7" />
+                                                    <mat-icon matSuffix class="color-neo-light-red"
+                                                        matTooltip="Enter user number between 1 and 7 characters in length"
+                                                        *ngIf="!apiService.validate(masterForm,'userNumber')">info</mat-icon>
+                                                    <mat-icon matSuffix class="text-success"
+                                                        *ngIf="apiService.validate(masterForm,'userNumber')">
+                                                        done
+                                                    </mat-icon>
+                                                    <mat-error
+                                                        *ngIf="f.userNumber.errors && f.userNumber.touched && !f.userNumber.valid">
+                                                        <span
+                                                            *ngIf="f.userNumber.errors?.pattern">{{formControlsAndValidations.validationMessages.userNumber}}</span>
+                                                        <span *ngIf="f.userNumber.errors?.required">User number is
+                                                            required</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label" matTooltip="User Name"
+                                            matTooltipPosition="above">
+                                            User Name
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <mat-form-field class="col-md-12 div-form-field">
+                                                    <input id="userName" matInput type="text" formControlName="userName"
+                                                        placeholder="Please enter user name" maxlength="40" />
+                                                    <mat-icon matSuffix class="color-neo-light-red"
+                                                        matTooltip="Enter username between 1 and 40 characters in length"
+                                                        *ngIf="!apiService.validate(masterForm,'userName')">info</mat-icon>
+                                                    <mat-icon matSuffix class="text-success"
+                                                        *ngIf="apiService.validate(masterForm,'userName')">
+                                                        done
+                                                    </mat-icon>
+                                                    <mat-error
+                                                        *ngIf="f.userName.errors && f.userName.touched && !f.userName.valid">
+                                                        <span
+                                                            *ngIf="f.userName.errors?.pattern">{{formControlsAndValidations.validationMessages.userName}}</span>
+                                                        <span *ngIf="f.userName.errors?.required">User name is
+                                                            required</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label" matTooltip="ECS Tape Input Number"
+                                            matTooltipPosition="above">
+                                            ECS Tape Input Number
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <mat-form-field class="col-md-12 div-form-field">
+                                                    <input id="esctTapeInputNumber" matInput type="text"
+                                                        formControlName="esctTapeInputNumber"
+                                                        placeholder="Please enter ecs tape input number"
+                                                        maxlength="9" />
+                                                    <mat-icon matSuffix class="color-neo-light-red"
+                                                        matTooltip="Enter ecs tape input number between 1 and 9 characters in length"
+                                                        *ngIf="!apiService.validate(masterForm,'esctTapeInputNumber')">info</mat-icon>
+                                                    <mat-icon matSuffix class="text-success"
+                                                        *ngIf="apiService.validate(masterForm,'esctTapeInputNumber')">
+                                                        done
+                                                    </mat-icon>
+                                                    <mat-error
+                                                        *ngIf="f.esctTapeInputNumber.errors && f.esctTapeInputNumber.touched && !f.esctTapeInputNumber.valid">
+                                                        <span
+                                                            *ngIf="f.esctTapeInputNumber.errors?.pattern">{{formControlsAndValidations.validationMessages.esctTapeInputNumber}}</span>
+                                                        <span *ngIf="f.esctTapeInputNumber.errors?.required">ECS tape
+                                                            input number
+                                                            is
+                                                            required</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label" matTooltip="Ledger Folio Number"
+                                            matTooltipPosition="above">
+                                            Ledger Folio Number
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <mat-form-field class="col-md-12 div-form-field">
+                                                    <input id="ledgerFolioNumber" matInput type="text"
+                                                        formControlName="ledgerFolioNumber"
+                                                        placeholder="Please enter ledger folio number" maxlength="3" />
+                                                    <mat-icon matSuffix class="color-neo-light-red"
+                                                        matTooltip="Enter ledger folio number between 1 and 3 characters in length"
+                                                        *ngIf="!apiService.validate(masterForm,'ledgerFolioNumber')">info</mat-icon>
+                                                    <mat-icon matSuffix class="text-success"
+                                                        *ngIf="apiService.validate(masterForm,'ledgerFolioNumber')">
+                                                        done
+                                                    </mat-icon>
+                                                    <mat-error
+                                                        *ngIf="f.ledgerFolioNumber.errors && f.ledgerFolioNumber.touched && !f.ledgerFolioNumber.valid">
+                                                        <span
+                                                            *ngIf="f.ledgerFolioNumber.errors?.pattern">{{formControlsAndValidations.validationMessages.ledgerFolioNumber}}</span>
+                                                        <span *ngIf="f.ledgerFolioNumber.errors?.required">Ledger folio
+                                                            number is
+                                                            required</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label" matTooltip="Credit Items Limit"
+                                            matTooltipPosition="above">
+                                            Credit Items Limit
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <mat-form-field class="col-md-12 div-form-field">
+                                                    <input id="creditItemLimit" matInput type="text"
+                                                        formControlName="creditItemLimit"
+                                                        placeholder="Please enter credit items limit" maxlength="14" />
+                                                    <mat-icon matSuffix class="color-neo-light-red"
+                                                        matTooltip="Enter credit items limit between 1 and 14 characters in length"
+                                                        *ngIf="!apiService.validate(masterForm,'creditItemLimit')">info</mat-icon>
+                                                    <mat-icon matSuffix class="text-success"
+                                                        *ngIf="apiService.validate(masterForm,'creditItemLimit')">
+                                                        done
+                                                    </mat-icon>
+                                                    <mat-error
+                                                        *ngIf="f.creditItemLimit.errors && f.creditItemLimit.touched && !f.creditItemLimit.valid">
+                                                        <span
+                                                            *ngIf="f.creditItemLimit.errors?.pattern">{{formControlsAndValidations.validationMessages.creditItemLimit}}</span>
+                                                        <span *ngIf="f.creditItemLimit.errors?.required">Credit items
+                                                            limit is
+                                                            required</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label" matTooltip="Credit Reference"
+                                            matTooltipPosition="above">
+                                            Credit Reference
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <mat-form-field class="col-md-12 div-form-field">
+                                                    <input id="creditReference" matInput type="text"
+                                                        formControlName="creditReference"
+                                                        placeholder="Please enter credit reference" maxlength="13" />
+                                                    <mat-icon matSuffix class="color-neo-light-red"
+                                                        matTooltip="Enter credit reference between 1 and 13 characters in length"
+                                                        *ngIf="!apiService.validate(masterForm,'creditReference')">info</mat-icon>
+                                                    <mat-icon matSuffix class="text-success"
+                                                        *ngIf="apiService.validate(masterForm,'creditReference')">
+                                                        done
+                                                    </mat-icon>
+                                                    <mat-error
+                                                        *ngIf="f.creditReference.errors && f.creditReference.touched && !f.creditReference.valid">
+                                                        <span
+                                                            *ngIf="f.creditReference.errors?.pattern">{{formControlsAndValidations.validationMessages.creditReference}}</span>
+                                                        <span *ngIf="f.creditReference.errors?.required">Credit
+                                                            reference limit
+                                                            is
+                                                            required</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label" matTooltip="Description"
+                                            matTooltipPosition="above">
+                                            Description</div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <mat-form-field class="col-md-12 div-form-field">
+                                                    <input id="description" matInput type="text"
+                                                        formControlName="description"
+                                                        placeholder="Please enter description" maxlength="200" />
+                                                    <mat-icon matSuffix class="color-neo-light-red"
+                                                        *ngIf="!apiService.validate(masterForm,'description')"
+                                                        [matTooltip]="commonMessages.DESCRIPTION">info</mat-icon>
+                                                    <mat-icon matSuffix class="text-success"
+                                                        *ngIf="apiService.validate(masterForm,'description')">
+                                                        done
+                                                    </mat-icon>
+                                                    <mat-error
+                                                        *ngIf="f.description.errors && f.description.touched && !f.description.valid">
+                                                        <span
+                                                            *ngIf="f.description.errors?.pattern">{{formControlsAndValidations.validationMessages.description}}</span>
+                                                        <span *ngIf="f.description.errors?.required">Description is
+                                                            required</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label asterisk " matTooltip="Sequence"
+                                            matTooltipPosition="above">
+                                            Sequence
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <mat-form-field class="col-md-12 div-form-field">
+                                                    <input id="sequence" matInput type="text" formControlName="sequence"
+                                                        maxlength="9" placeholder="Please enter sequence" />
+                                                    <mat-icon matSuffix class="color-neo-light-red"
+                                                        [matTooltip]="commonMessages.SEQUENCE"
+                                                        *ngIf="!apiService.validate(masterForm,'sequence')">info</mat-icon>
+                                                    <mat-icon matSuffix class="text-success"
+                                                        *ngIf="apiService.validate(masterForm,'sequence')">
+                                                        done
+                                                    </mat-icon>
+                                                    <mat-error
+                                                        *ngIf="f.sequence.errors && f.sequence.touched && !f.sequence.valid">
+                                                        <span
+                                                            *ngIf="f.sequence.errors?.pattern">{{formControlsAndValidations.validationMessages.sequence}}</span>
+                                                        <span *ngIf="f.sequence.errors?.required">Sequence is
+                                                            required</span>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label" style="margin-top: 0.4cm"
+                                            matTooltip="Is Restricted" matTooltipPosition="above">
+                                            Is Restricted</div>
+                                        <div class="col-md-8 align-items-center div-form-field">
+                                            <mat-radio-group id="isRestricted" formControlName="isRestricted">
+                                                <mat-radio-button style="margin-top: 0.4cm" [value]="option.rowId"
+                                                    *ngFor="let option of radioOptionsYesNo" class="multiple-radios">
+                                                    {{option.title}}
+                                                </mat-radio-button>
+
+                                                <mat-error
+                                                    *ngIf="(f.isRestricted.errors && f.isRestricted.touched) && !f.isRestricted.valid">
+                                                    <span *ngIf="f.isRestricted.errors?.required">Select restricted
+                                                        value</span>
+                                                </mat-error>
+                                            </mat-radio-group>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label  " style="margin-top: 0.4cm"
+                                            matTooltip="Is Excluded" matTooltipPosition="above">
+                                            Is Excluded</div>
+                                        <div class="col-md-8 align-items-center div-form-field">
+                                            <mat-radio-group id="isExcluded" formControlName="isExcluded">
+                                                <mat-radio-button style="margin-top: 0.4cm" [value]="option.rowId"
+                                                    *ngFor="let option of radioOptionsYesNo" class="multiple-radios">
+                                                    {{option.title}}
+                                                </mat-radio-button>
+
+                                                <mat-error
+                                                    *ngIf="(f.isExcluded.errors && f.isExcluded.touched) && !f.isExcluded.valid">
+                                                    <span *ngIf="f.isExcluded.errors?.required">Select excluded
+                                                        value</span>
+                                                </mat-error>
+                                            </mat-radio-group>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label asterisk" matTooltip="From Date"
+                                            matTooltipPosition="above">
+                                            From Date</div>
+                                        <div class="col-md-8 align-items-center div-form-field">
+                                            <mat-form-field class="col-md-12 div-form-field">
+                                                <input id="fromDate" (click)="picker1.open()" [min]="minDate" matInput
+                                                    formControlName="fromDate"
+                                                    placeholder="Please select from date (DD/MM/YYYY)"
+                                                    [matDatepicker]="picker1" readonly>
+                                                <mat-datepicker-toggle matSuffix
+                                                    [for]="picker1"></mat-datepicker-toggle>
+                                                <button mat-icon-button matSuffix *ngIf="f.fromDate.value"
+                                                    (click)="clearDate('fromDate')">
+                                                    <mat-icon>cancel</mat-icon>
+                                                </button>
+                                                <mat-datepicker #picker1></mat-datepicker>
+                                                <mat-error *ngIf="f.fromDate.invalid && f.fromDate.touched">
+                                                    <span *ngIf="f.fromDate.errors?.required">Select from date</span>
+                                                    <span>{{errorMessage}}</span>
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label" matTooltip="To Date"
+                                            matTooltipPosition="above">
+                                            To Date</div>
+                                        <div class="col-md-8 align-items-center div-form-field">
+                                            <mat-form-field class="col-md-12 div-form-field">
+                                                <input id="toDate" (click)="picker.open()"
+                                                    [min]="this.masterForm.get('fromDate').value" matInput
+                                                    formControlName="toDate"
+                                                    placeholder="Please select to date (DD/MM/YYYY)"
+                                                    [matDatepicker]="picker" readonly>
+                                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                <button mat-icon-button matSuffix *ngIf="f.toDate.value"
+                                                    (click)="clearDate('toDate')">
+                                                    <mat-icon>cancel</mat-icon>
+                                                </button>
+                                                <mat-datepicker #picker></mat-datepicker>
+                                                <mat-error *ngIf="f.toDate.invalid && f.toDate.touched">
+                                                    <span *ngIf="f.toDate.errors?.required">Select date</span>
+                                                    <span *ngIf="f.toDate.invalid && f.toDate.touched">To date should be
+                                                        greater than from date</span>
+
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label" style="margin-top: 0.4cm;"
+                                            matTooltip="Anchor Tag" matTooltipPosition="above">
+                                            Anchor Tag
+                                        </div>
+                                        <div class="col-md-8">
+                                            <section class="example-section">
+                                                <p><mat-checkbox style="margin-top: 0.5cm;"
+                                                        formControlName="isAnchorTagged"></mat-checkbox></p>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-4 mat-form-label " style="margin-top: 0.4cm"
+                                            matTooltip="Status" matTooltipPosition="above">
+                                            Status
+                                        </div>
+                                        <div class="col-md-8 align-items-center div-form-field">
+                                            <app-toggle-control
+                                                [control]="this.masterForm.get('isActive')"></app-toggle-control>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="row btn-row-div">
+                <div [ngClass]="{'col-md-6': !this.params.fundSourceId, 'col-md-8': this.params.fundSourceId}"></div>
+                <div class="col-md-2">
+                    <button id="saveFundSource" class="btn-brand-green" (click)="saveFundSource('saveAndRoute')"
+                        [matTooltip]="commonMessages.SAVE" *ifActionAllowed="'create_fund_source'"> {{ this.params.fundSourceId && this.params.cloneFlag ?
+                        'Clone' : 'Save' }}</button>
+                </div>
+                <div class="col-md-2" *ngIf="!this.params.fundSourceId">
+                    <button id="saveContinueFundSource" class="btn-brand-green"
+                        [matTooltip]="commonMessages.SAVE_AND_CONTINUE" (click)="saveFundSource('saveAndReset')"
+                        *ifActionAllowed="'create_fund_source'">Save & Continue</button>
+                </div>
+                <div class="col-md-2">
+                    <button id="back" class="btn-brand-black" matTooltip="Back"
+                        (click)="apiService.goBack()">Back</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="row" *ngIf = "this.params.fundSourceId && !this.params.cloneFlag">
+        <app-master-audit-log [gridId]="fundSourceAuditGridId" [propertyId]="propertyId" 
+            [propertyName]="propertyName" [tableName]="tableName" [recordId] = "recordId"></app-master-audit-log>
+    </div>
+</div>

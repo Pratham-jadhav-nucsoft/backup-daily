@@ -1,0 +1,638 @@
+<div class="container-fluid">
+    <div class="row ng-section">
+        <div class="col-md-12 custom-header" (click)="toggleCollapse1()" role="button">
+            <h2><mat-icon style="vertical-align: middle;">menu</mat-icon>Commercials</h2>
+        </div>
+    </div>
+
+    <div class="row ng-section inner-section" *ngIf="isFormCollapsed">
+        <div class="col-md-12 custom-header" (click)="toggleCollapse2()" role="button">
+            <h2><mat-icon style="vertical-align: middle;">menu</mat-icon> Term Loan</h2>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="isFormCollapsed2">
+        <form [formGroup]="limitForm">
+            <div class="container-fluid form1">
+
+                <div class="row">
+                    <div class="col-md-1">
+                        <div class="row align-items-center">
+                            <div class=" mat-form-label" style="margin-top: 0.4cm;">
+                                Limit TIcket (₹) :
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4 mat-form-label" matTooltip="Phone Number"
+                                        matTooltipPosition="above" style="margin-top: 0.4cm;">
+                                        Min *:
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <mat-form-field class="col-md-12 div-form-field">
+                                                <input matInput type="text" placeholder="Please enter Min"
+                                                    />
+
+                                                <mat-icon matSuffix matTooltip="Product description">info</mat-icon>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4 mat-form-label" matTooltip="Phone Number"
+                                        matTooltipPosition="above" style="margin-top: 0.4cm;">
+                                        Max *:
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <mat-form-field class="col-md-12 div-form-field">
+                                                <input matInput type="text" placeholder="Please enter Min"
+                                                     />
+
+                                                <mat-icon matSuffix matTooltip="Product description">info</mat-icon>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-1">
+                        <div class="row align-items-center">
+                            <div class=" mat-form-label" style="margin-top: 0.4cm;">
+                                Tenure :
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4 mat-form-label" matTooltip="Phone Number"
+                                        matTooltipPosition="above" style="margin-top: 0.4cm;">
+                                        Disb (Months):
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <mat-form-field class="col-md-12 div-form-field">
+                                                <input matInput type="text" placeholder="Please enter Min"
+                                                    />
+
+                                                <mat-icon matSuffix matTooltip="Product description">info</mat-icon>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4 mat-form-label" matTooltip="Phone Number"
+                                        matTooltipPosition="above" style="margin-top: 0.4cm;">
+                                        Repayment (Months):
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <mat-form-field class="col-md-12 div-form-field">
+                                                <input matInput type="text" placeholder="Please enter Min"
+                                                   />
+
+                                                <mat-icon matSuffix matTooltip="Product description">info</mat-icon>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4 mat-form-label" matTooltip="Phone Number"
+                                        matTooltipPosition="above" style="margin-top: 0.4cm;">
+                                        Total (Months):
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <mat-form-field class="col-md-12 div-form-field">
+                                                <input matInput type="text" placeholder="Please enter Min"
+                                                    />
+
+                                                <mat-icon matSuffix matTooltip="Product description">info</mat-icon>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<br>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="row align-items-center">
+                                 <div class="col-md-4 mat-form-label" matTooltip="Phone Number" matTooltipPosition="above"
+                                style="margin-top: 0.4cm;">
+                                Increase / Decrease Limit amount(₹) :
+                            </div>
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <mat-form-field class="col-md-12 div-form-field">
+                                        <input matInput type="text" placeholder="Please enter Product name"
+                                           />
+
+                                        <mat-icon matSuffix matTooltip="Product Name">info</mat-icon>
+                                        <!-- <mat-error
+                        *ngIf="bankingForm.get('phoneNumber')?.hasError('pattern')">input
+                        only 8 digits</mat-error> -->
+
+
+
+
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+
+                        <div class="row align-items-center">
+                            <div class="col-md-4 mat-form-label" matTooltip="Phone Number" matTooltipPosition="above"
+                                style="margin-top: 0.4cm;">
+                                Grace Period :
+                            </div>
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <mat-form-field class="col-md-12 div-form-field">
+                                        <input matInput type="text" placeholder="Please enter Product description"
+                                           />
+
+                                        <mat-icon matSuffix matTooltip="Product description">info</mat-icon>
+
+
+
+
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row align-items-center">
+                            <div class="col-md-4 mat-form-label asterisk" matTooltip="Branch IFSC Code"
+                                matTooltipPosition="above" style="margin-top: 0.4cm;">
+                                Statement Cycle<span>&nbsp;*</span>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <div class="col-md-12 div-form-field">
+                                        <ng-select placeholder="Please select company name"
+                                          >
+                                        </ng-select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+<!-- third row ended -->
+<div class="row">
+    <div class="col-md-4">
+        <div class="row align-items-center">
+                 <div class="col-md-4 mat-form-label" matTooltip="Phone Number" matTooltipPosition="above"
+                style="margin-top: 0.4cm;">
+                Interest %:
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <mat-form-field class="col-md-12 div-form-field">
+                        <input matInput type="text" placeholder="Please enter Product name"
+                           />
+
+                        <mat-icon matSuffix matTooltip="Product Name">info</mat-icon>
+                        <!-- <mat-error
+        *ngIf="bankingForm.get('phoneNumber')?.hasError('pattern')">input
+        only 8 digits</mat-error> -->
+
+
+
+
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+
+        <div class="row align-items-center">
+            <div class="col-md-4 mat-form-label asterisk" matTooltip="From Date"
+                matTooltipPosition="above" style="margin-top: 0.4cm;">
+                Effective Date<span>&nbsp;*</span></div>
+            <div class="col-md-8 align-items-center div-form-field">
+                <mat-form-field class="col-md-12 div-form-field" style="margin: none;">
+                    <input  matinput id="fromDate" (click)="picker1.open()" matInput
+                      
+                        placeholder="Please select from date (DD/MM/YYYY)"
+                        [matDatepicker]="picker1">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+
+                    <mat-datepicker #picker1></mat-datepicker>
+                    <!-- <mat-error *ngIf="fromDate.invalid && fromDate.touched">
+                            <span *ngIf="f.fromDate.errors?.required">Select from date</span>
+                            <span>{{errorMessage}}</span>
+                        </mat-error> -->
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<!-- fourth row ended -->
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="row align-items-center">
+                 <div class="col-md-4 mat-form-label" matTooltip="Phone Number" matTooltipPosition="above"
+                style="margin-top: 0.4cm;">
+               Penal Rate Of Interest %:
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <mat-form-field class="col-md-12 div-form-field">
+                        <input matInput type="text" placeholder="Please enter Product name"
+                           />
+
+                        <mat-icon matSuffix matTooltip="Product Name">info</mat-icon>
+                        <!-- <mat-error
+        *ngIf="bankingForm.get('phoneNumber')?.hasError('pattern')">input
+        only 8 digits</mat-error> -->
+
+
+
+
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+
+        <div class="row align-items-center">
+            <div class="col-md-4 mat-form-label asterisk" matTooltip="From Date"
+                matTooltipPosition="above" style="margin-top: 0.4cm;">
+                Effective Date<span>&nbsp;*</span></div>
+            <div class="col-md-8 align-items-center div-form-field">
+                <mat-form-field class="col-md-12 div-form-field" style="margin: none;">
+                    <input  matinput id="fromDate" (click)="picker1.open()" matInput
+                      
+                        placeholder="Please select from date (DD/MM/YYYY)"
+                        [matDatepicker]="picker1">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+
+                    <mat-datepicker #picker1></mat-datepicker>
+                    <!-- <mat-error *ngIf="fromDate.invalid && fromDate.touched">
+                            <span *ngIf="f.fromDate.errors?.required">Select from date</span>
+                            <span>{{errorMessage}}</span>
+                        </mat-error> -->
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<!-- fifth row ended -->
+<div class="row">
+    <div class="col-md-4">
+        <div class="row align-items-center">
+                 <div class="col-md-4 mat-form-label" matTooltip="Phone Number" matTooltipPosition="above"
+                style="margin-top: 0.4cm;">
+          Minimum Payment(₹) :
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <mat-form-field class="col-md-12 div-form-field">
+                        <input matInput type="text" placeholder="Please enter Product name"
+                           />
+
+                        <mat-icon matSuffix matTooltip="Product Name">info</mat-icon>
+                        <!-- <mat-error
+        *ngIf="bankingForm.get('phoneNumber')?.hasError('pattern')">input
+        only 8 digits</mat-error> -->
+
+
+
+
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+
+        <div class="row align-items-center">
+            <div class="col-md-4 mat-form-label" matTooltip="Phone Number" matTooltipPosition="above"
+                style="margin-top: 0.4cm;">
+                Processing Fee(%) :
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <mat-form-field class="col-md-12 div-form-field">
+                        <input matInput type="text" placeholder="Please enter Product description"
+                           />
+
+                        <mat-icon matSuffix matTooltip="Product description">info</mat-icon>
+
+
+
+
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="row align-items-center">
+            <div class="col-md-4 mat-form-label" matTooltip="Phone Number" matTooltipPosition="above"
+                style="margin-top: 0.4cm;">
+                GST(%) :
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <mat-form-field class="col-md-12 div-form-field">
+                        <input matInput type="text" placeholder="Please enter Product description"
+                           />
+
+                        <mat-icon matSuffix matTooltip="Product description">info</mat-icon>
+
+
+
+
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- sixth row ended -->
+<div class="row">
+    <div class="col-md-4">
+        <div class="row align-items-center">
+                 <div class="col-md-4 mat-form-label" matTooltip="Phone Number" matTooltipPosition="above"
+                style="margin-top: 0.4cm;">
+          Cheque Bounce Charge(₹) :
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <mat-form-field class="col-md-12 div-form-field">
+                        <input matInput type="text" placeholder="Please enter Product name"
+                           />
+
+                        <mat-icon matSuffix matTooltip="Product Name">info</mat-icon>
+                        <!-- <mat-error
+        *ngIf="bankingForm.get('phoneNumber')?.hasError('pattern')">input
+        only 8 digits</mat-error> -->
+
+
+
+
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+
+        <div class="row align-items-center">
+            <div class="col-md-4 mat-form-label" matTooltip="Phone Number" matTooltipPosition="above"
+                style="margin-top: 0.4cm;">
+                NACH Bounce Charge(%) :
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <mat-form-field class="col-md-12 div-form-field">
+                        <input matInput type="text" placeholder="Please enter Product description"
+                           />
+
+                        <mat-icon matSuffix matTooltip="Product description">info</mat-icon>
+
+
+
+
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="row align-items-center">
+            <div class="col-md-4 mat-form-label" matTooltip="Phone Number" matTooltipPosition="above"
+                style="margin-top: 0.4cm;">
+                Tolerance Period(Days) :
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <mat-form-field class="col-md-12 div-form-field">
+                        <input matInput type="text" placeholder="Please enter Product description"
+                           />
+
+                        <mat-icon matSuffix matTooltip="Product description">info</mat-icon>
+
+
+
+
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- seveth row ended -->
+<div class="row">
+    <div class="col-md-4">
+        <div class="row align-items-center">
+                 <div class="col-md-4 mat-form-label" matTooltip="Phone Number" matTooltipPosition="above"
+                style="margin-top: 0.4cm;">
+          Minimum Disbursement (₹):
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <mat-form-field class="col-md-12 div-form-field">
+                        <input matInput type="text" placeholder="Please enter Product name"
+                           />
+
+                        <mat-icon matSuffix matTooltip="Product Name">info</mat-icon>
+                        <!-- <mat-error
+        *ngIf="bankingForm.get('phoneNumber')?.hasError('pattern')">input
+        only 8 digits</mat-error> -->
+
+
+
+
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+
+        <div class="row align-items-center">
+            <div class="col-md-4 mat-form-label" matTooltip="Phone Number" matTooltipPosition="above"
+                style="margin-top: 0.4cm;">
+                Tolerance Amount(₹) :
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <mat-form-field class="col-md-12 div-form-field">
+                        <input matInput type="text" placeholder="Please enter Product description"
+                           />
+
+                        <mat-icon matSuffix matTooltip="Product description">info</mat-icon>
+
+
+
+
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="row align-items-center">
+            <div class="col-md-4 mat-form-label" matTooltip="Phone Number" matTooltipPosition="above"
+                style="margin-top: 0.4cm;">
+                DPD Tolerance Amount(₹) :
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <mat-form-field class="col-md-12 div-form-field">
+                        <input matInput type="text" placeholder="Please enter Product description"
+                           />
+
+                        <mat-icon matSuffix matTooltip="Product description">info</mat-icon>
+
+
+
+
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- eigth row ended -->
+<div class="row">
+    <div class="col-md-4">
+        <div class="row align-items-center">
+            <div class="col-md-4 mat-form-label asterisk" matTooltip="Branch IFSC Code"
+                matTooltipPosition="above" style="margin-top: 0.4cm;">
+                Order Disbursed Event:<span>&nbsp;*</span>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-12 div-form-field">
+                        <ng-select placeholder="Please select company name"
+                          >
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="row align-items-center">
+            <div class="col-md-4 mat-form-label asterisk" matTooltip="Branch IFSC Code"
+                matTooltipPosition="above" style="margin-top: 0.4cm;">
+                Interest Calculation Method:<span>&nbsp;*</span>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-12 div-form-field">
+                        <ng-select placeholder="Please select company name"
+                          >
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="row align-items-center">
+            <div class="col-md-4 mat-form-label asterisk" matTooltip="Branch IFSC Code"
+                matTooltipPosition="above" style="margin-top: 0.4cm;">
+                Penal Interest Calculation Method<span>&nbsp;*</span>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-12 div-form-field">
+                        <ng-select placeholder="Please select company name"
+                          >
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ninth row ended -->
+<div class="row">
+    <div class="col-md-4">
+        <div class="row align-items-center">
+            <div class="col-md-4 mat-form-label asterisk" matTooltip="Branch IFSC Code"
+                matTooltipPosition="above" style="margin-top: 0.4cm;">
+                Minimum Amount Due Calculation Method:<span>&nbsp;*</span>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-12 div-form-field">
+                        <ng-select placeholder="Please select company name"
+                          >
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="row align-items-center">
+                 <div class="col-md-4 mat-form-label" matTooltip="Phone Number" matTooltipPosition="above"
+                style="margin-top: 0.4cm;">
+                Coding Period (Hrs):
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <mat-form-field class="col-md-12 div-form-field">
+                        <input matInput type="text" placeholder="Please enter Product name"
+                           />
+
+                        <mat-icon matSuffix matTooltip="Product Name">info</mat-icon>
+                        <!-- <mat-error
+        *ngIf="bankingForm.get('phoneNumber')?.hasError('pattern')">input
+        only 8 digits</mat-error> -->
+
+
+
+
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+            </div>
+        </form>
+    </div>
+</div>
